@@ -92,6 +92,6 @@ Once Dynamic Content has been created that contains the contents of a .macro fil
       ```
       \{{<DYNAMIC CONTENT PLACEHOLDER>}}
       ```
-NOTE: You must escape the dynamic content placeholder with a forward slash "\".
+NOTE: You must escape the dynamic content placeholder with a forward slash "\\".
 
 
