@@ -1,0 +1,33 @@
+# NOTE: 
+# YOU CAN NAME THE INSTANCES WHATEVER YOU WISH.
+# IN THIS SAMPLE CONFIG, I HAVE NAMED THE INSTANCES "production" and "sandbox"
+# THEY COULD JUST AS EASILY BE NAMED "freelance" and "starlight"
+# DO NOT CHANGE THE *NAME* OF THESE VARIABLES: "domain", "auth", or "ignore_fields" UNLESS YOU KNOW WHAT YOU ARE DOING
+
+# BELOW IS A SAMPLE CONFIGURATION FOR A PRODUCTION INSTANCE:
+production:
+  # I.E: d3v-kairosnature
+  domain: <ZENDESK SUBDOMAIN NAME>
+
+  # THE BELOW WILL BE YOUR BASE64 ENCODED STRING
+  # https://github.com/whitelotusapps/zendesk-developer-user-group/wiki/2023-05-26-Zendesk-Developer-User-Group-Developer-Tools-Postman#how-to-base64-encode-your-zendesk-api-token
+  auth: Basic <API KEY>
+
+  # IF USING OAuth, then use the below line instead, and comment out the above line for the API KEY
+  #auth: Bearer <OAuth Secret>
+
+  # YOU WILL NEED TO SET AT LEAST ONE VALUE, OR ELSE THE SCRIPT WILL ERROR OUT
+  ignore_fields: 
+    #status: <STATUS FIELD ID>
+    #group: <GROUP FIELD ID>
+    #assignee: <ASSIGNEE FIELD ID>
+
+
+# BELOW IS A SAMPLE CONFIGURATION FOR A SANBOX INSTANCE:
+sandbox:
+  domain: <ZENDESK SUBDOMAIN NAME>
+  auth: Basic <API KEY>
+  ignore_fields: 
+    #status: <STATUS FIELD ID>
+    #group: <GROUP FIELD ID>
+    #assignee: <ASSIGNEE FIELD ID>

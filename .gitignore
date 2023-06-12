@@ -1,0 +1,14 @@
+# Ignore these file types:
+*.csv
+*.json
+*.macro
+
+# Ensure that our example files are synced:
+!20230612-113122 - d3v-kairosnature - Kairos Nature LLC.csv
+!20230612-113122 - d3v-kairosnature - Test Brand.csv
+
+!20230612-113122 - d3v-kairosnature - Kairos Nature LLC.json
+!20230612-113122 - d3v-kairosnature - Test Brand.json
+
+!20230612-113122 - d3v-kairosnature - Kairos Nature LLC.macro
+!20230612-113122 - d3v-kairosnature - Test Brand.macro
