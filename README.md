@@ -7,7 +7,13 @@
 ![GitHub last commit](https://img.shields.io/github/last-commit/whitelotusapps/table-of-field-values)
 # table-of-field-values
 Create an internal comment that shows all of the populated field of a form in a concise table of field values.
+## Safety Level
+SAFE
 
+- READ-ONLY regarding Zendesk instances
+- This script only performs GET API requests
+- No data is written into the Zendesk instance itself
+- Only files written to the local machine are written
 ## Configuration:
 You will need to ensure that you edit the .config.yaml file and configure it according to your Zendesk instances.
 
