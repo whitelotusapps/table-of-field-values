@@ -47,9 +47,7 @@ for folder in folders:
 ######################################################################################################################################
 
 ######################################################################################################################################
-print(
-    f"\n=============================================================================================================\nDOMAIN: {domain}\n\n=============================================================================================================\n"
-)
+print(f"\n=============================================================================================================\nDOMAIN: {domain}\n\n=============================================================================================================\n")
 
 timestr = time.strftime("%Y%m%d-%H%M%S")
 ######################################################################################################################################
@@ -117,9 +115,7 @@ for brand in all_brands:
         brand_forms_macro_liquid_markup = ""
         brand_forms_complete_json = '''{"ticket":{"comment":{"html_body": "'''
 
-        print(
-            f"\n=============================================================================================================\nDOMAIN: {domain}\nBRAND : {brand_name}\n\n=============================================================================================================\n"
-        )
+        print(f"\n=============================================================================================================\nDOMAIN: {domain}\nBRAND : {brand_name}\n\n=============================================================================================================\n")
 
         ######################################################################################################################################
 
@@ -128,9 +124,7 @@ for brand in all_brands:
         payload = {}
         headers = {"Authorization": f"{auth}"}
 
-        response = requests.request(
-            "GET", url, headers=headers, data=payload, timeout=10
-        ).text
+        response = requests.request("GET", url, headers=headers, data=payload, timeout=10).text
         all_forms = json.loads(response)
         current_set_of_forms = all_forms["ticket_forms"]
 
@@ -142,9 +136,7 @@ for brand in all_brands:
 
             if form_name and form_active is True:
                 form_counter += 1
-                print(
-                    "\n=============================================================================================================\n"
-                )
+                print("\n=============================================================================================================\n")
                 # print(f"{form_counter} - Brand: {brand_name}\t\tForm Name: {form_name}\t\tForm ID: {form_id}\t\n\nForm Field IDs:\n")
                 print(
                     f"{form_counter} - Brand: {brand_name}\t\tForm Name: {form_name}\t\tForm ID: {form_id}\t\n"
@@ -194,12 +186,8 @@ for brand in all_brands:
                 ######################################################################################################################################
                 for form_field_id in form_field_ids:
                     if form_field_id in all_ticket_fields:
-                        raw_ticket_field_name = all_ticket_fields[form_field_id][
-                            "title"
-                        ]
-                        ticket_field_name_in_portal = all_ticket_fields[form_field_id][
-                            "title_in_portal"
-                        ]
+                        raw_ticket_field_name = all_ticket_fields[form_field_id]["title"]
+                        ticket_field_name_in_portal = all_ticket_fields[form_field_id]["title_in_portal"]
                         ticket_field_type = all_ticket_fields[form_field_id]["type"]
 
                         if form_field_id not in ignore_fields.values():
@@ -207,18 +195,11 @@ for brand in all_brands:
                             match ticket_field_type:
                                 case "multiselect" | "tagger" | "integer":
                                     if ":" in raw_ticket_field_name:
-                                        ticket_field_name = (
-                                            raw_ticket_field_name.partition(":")[
-                                                2
-                                            ].strip()
-                                        )
+                                        ticket_field_name = (raw_ticket_field_name.partition(":")[2].strip())
                                     else:
                                         ticket_field_name = raw_ticket_field_name
 
-                                    if (
-                                        ticket_field_type == "multiselect"
-                                        and matched_field == 0
-                                    ):
+                                    if (ticket_field_type == "multiselect" and matched_field == 0):
                                         ticket_field_placeholder = (
                                             "{{"
                                             + f"ticket.ticket_field_option_title_{form_field_id}"
@@ -229,20 +210,14 @@ for brand in all_brands:
                                             "{% if "
                                             + f"ticket.ticket_field_option_title_{form_field_id}"
                                             + " != "
-                                            """'' and ticket.ticket_field_option_title_{}""".format(
-                                                form_field_id
-                                            )
+                                            """'' and ticket.ticket_field_option_title_{}""".format(form_field_id)
                                             + " != "
                                             """'-"""
                                             """'  %}"""
-                                            + """<tr><td><strong>{}""".format(
-                                                ticket_field_name
-                                            )
+                                            + """<tr><td><strong>{}""".format(ticket_field_name)
                                             + """</strong></td><td><ul><li>"""
                                             + "{{"
-                                            + "ticket.ticket_field_option_title_{}".format(
-                                                form_field_id
-                                            )
+                                            + "ticket.ticket_field_option_title_{}".format(form_field_id)
                                             + " | replace: "
                                             + "', '"
                                             + " , "
@@ -253,10 +228,7 @@ for brand in all_brands:
                                         whole_form_html += ticket_html_combo
                                         macro_form_html += ticket_html_combo
 
-                                    if (
-                                        ticket_field_type != "multiselect"
-                                        and matched_field == 0
-                                    ):
+                                    if (ticket_field_type != "multiselect" and matched_field == 0):
                                         ticket_field_placeholder = (
                                             "{{"
                                             + f"ticket.ticket_field_option_title_{form_field_id}"
@@ -267,20 +239,14 @@ for brand in all_brands:
                                             "{% if "
                                             + f"ticket.ticket_field_option_title_{form_field_id}"
                                             + " != "
-                                            """'' and ticket.ticket_field_option_title_{}""".format(
-                                                form_field_id
-                                            )
+                                            """'' and ticket.ticket_field_option_title_{}""".format(form_field_id)
                                             + " != "
                                             """'-"""
                                             """'  %}"""
-                                            + """<tr><td><strong>{}""".format(
-                                                ticket_field_name
-                                            )
+                                            + """<tr><td><strong>{}""".format(ticket_field_name)
                                             + """</strong></td><td>"""
                                             + "{{"
-                                            + "ticket.ticket_field_option_title_{}".format(
-                                                form_field_id
-                                            )
+                                            + "ticket.ticket_field_option_title_{}".format(form_field_id)
                                             + " | capitalize }}</td></tr>"
                                             + "{% endif %}"
                                         )
@@ -289,11 +255,7 @@ for brand in all_brands:
 
                                 case "checkbox":
                                     if ":" in raw_ticket_field_name:
-                                        ticket_field_name = (
-                                            raw_ticket_field_name.partition(":")[
-                                                2
-                                            ].strip()
-                                        )
+                                        ticket_field_name = (raw_ticket_field_name.partition(":")[2].strip())
                                     else:
                                         ticket_field_name = raw_ticket_field_name
 
@@ -302,18 +264,14 @@ for brand in all_brands:
                                         + f"ticket.ticket_field_{form_field_id}"
                                         + "}}"
                                     )
-                                    ticket_field_placeholder_plain = (
-                                        f"ticket.ticket_field_{form_field_id}"
-                                    )
+                                    ticket_field_placeholder_plain = (f"ticket.ticket_field_{form_field_id}")
                                     ticket_html_combo = (
                                         "{% if "
                                         + f"ticket.ticket_field_{form_field_id}"
                                         + " == "
                                         """'1"""
                                         """' %}"""
-                                        + """<tr><td><strong>{}""".format(
-                                            ticket_field_name
-                                        )
+                                        + """<tr><td><strong>{}""".format(ticket_field_name)
                                         + """</strong></td><td>"""
                                         + "Confirmed</td></tr>"
                                         + "{% endif %}"
@@ -323,20 +281,13 @@ for brand in all_brands:
 
                                 case "textarea":
                                     if ":" in raw_ticket_field_name:
-                                        ticket_field_name = (
-                                            raw_ticket_field_name.partition(":")[
-                                                2
-                                            ].strip()
-                                        )
+                                        ticket_field_name = (raw_ticket_field_name.partition(":")[2].strip())
                                     else:
                                         ticket_field_name = raw_ticket_field_name
 
                                 case "date":
                                     if ":" in raw_ticket_field_name:
-                                        ticket_field_name = (
-                                            raw_ticket_field_name.partition(":")[
-                                                2
-                                            ].strip()
+                                        ticket_field_name = (raw_ticket_field_name.partition(":")[2].strip()
                                         )
                                         ticket_field_placeholder = (
                                             "{{"
@@ -348,20 +299,14 @@ for brand in all_brands:
                                             "{% if "
                                             + f"ticket.ticket_field_option_title_{form_field_id}"
                                             + " != "
-                                            """'' and ticket.ticket_field_option_title_{}""".format(
-                                                form_field_id
-                                            )
+                                            """'' and ticket.ticket_field_option_title_{}""".format(form_field_id)
                                             + " != "
                                             """'-"""
                                             """'  %}"""
-                                            + """<tr><td><strong>{}""".format(
-                                                ticket_field_name
-                                            )
+                                            + """<tr><td><strong>{}""".format(ticket_field_name)
                                             + """</strong></td><td>"""
                                             + "{{"
-                                            + "ticket.ticket_field_option_title_{}".format(
-                                                form_field_id
-                                            )
+                                            + "ticket.ticket_field_option_title_{}".format(form_field_id)
                                             + "}}</td></tr>"
                                             + "{% endif %}"
                                         )
@@ -379,20 +324,14 @@ for brand in all_brands:
                                             "{% if "
                                             + f"ticket.ticket_field_option_title_{form_field_id}"
                                             + " != "
-                                            """'' and ticket.ticket_field_option_title_{}""".format(
-                                                form_field_id
-                                            )
+                                            """'' and ticket.ticket_field_option_title_{}""".format(form_field_id)
                                             + " != "
                                             """'-"""
                                             """'  %}"""
-                                            + """<tr><td><strong>{}""".format(
-                                                ticket_field_name
-                                            )
+                                            + """<tr><td><strong>{}""".format(ticket_field_name)
                                             + """</strong></td><td>"""
                                             + "{{"
-                                            + "ticket.ticket_field_option_title_{}".format(
-                                                form_field_id
-                                            )
+                                            + "ticket.ticket_field_option_title_{}".format(form_field_id)
                                             + "}}</td></tr>"
                                             + "{% endif %}"
                                         )
@@ -402,11 +341,7 @@ for brand in all_brands:
                                 case _:
                                     if matched_field == 0:
                                         if ":" in raw_ticket_field_name:
-                                            ticket_field_name = (
-                                                raw_ticket_field_name.partition(":")[
-                                                    2
-                                                ].strip()
-                                            )
+                                            ticket_field_name = (raw_ticket_field_name.partition(":")[2].strip())
                                             ticket_field_placeholder = (
                                                 "{{"
                                                 + f"ticket.ticket_field_option_title_{form_field_id}"
@@ -417,20 +352,14 @@ for brand in all_brands:
                                                 "{% if "
                                                 + f"ticket.ticket_field_option_title_{form_field_id}"
                                                 + " != "
-                                                """'' and ticket.ticket_field_option_title_{}""".format(
-                                                    form_field_id
-                                                )
+                                                """'' and ticket.ticket_field_option_title_{}""".format(form_field_id)
                                                 + " != "
                                                 """'-"""
                                                 """'  %}"""
-                                                + """<tr><td><strong>{}""".format(
-                                                    ticket_field_name
-                                                )
+                                                + """<tr><td><strong>{}""".format(ticket_field_name)
                                                 + """</strong></td><td>"""
                                                 + "{{"
-                                                + "ticket.ticket_field_option_title_{}".format(
-                                                    form_field_id
-                                                )
+                                                + "ticket.ticket_field_option_title_{}".format(form_field_id)
                                                 + "}}</td></tr>"
                                                 + "{% endif %}"
                                             )
@@ -449,20 +378,14 @@ for brand in all_brands:
                                                 "{% if "
                                                 + f"ticket.ticket_field_option_title_{form_field_id}"
                                                 + " != "
-                                                """'' and ticket.ticket_field_option_title_{}""".format(
-                                                    form_field_id
-                                                )
+                                                """'' and ticket.ticket_field_option_title_{}""".format(form_field_id)
                                                 + " != "
                                                 """'-"""
                                                 """'  %}"""
-                                                + """<tr><td><strong>{}""".format(
-                                                    ticket_field_name
-                                                )
+                                                + """<tr><td><strong>{}""".format(ticket_field_name)
                                                 + """</strong></td><td>"""
                                                 + "{{"
-                                                + "ticket.ticket_field_option_title_{}".format(
-                                                    form_field_id
-                                                )
+                                                + "ticket.ticket_field_option_title_{}".format(form_field_id)
                                                 + "}}</td></tr>"
                                                 + "{% endif %}"
                                             )
@@ -471,9 +394,7 @@ for brand in all_brands:
 
                             if write_files == True:
                                 with open(csv_output, "a") as csv_output_file:
-                                    csv_output_file.write(
-                                        f",,{form_field_id},{ticket_field_name},{ticket_field_type},{ticket_field_placeholder},{ticket_field_placeholder_plain}\n"
-                                    )
+                                    csv_output_file.write(f",,{form_field_id},{ticket_field_name},{ticket_field_type},{ticket_field_placeholder},{ticket_field_placeholder_plain}\n")
 
                 #                           print("{: >30} ({: >30}) ({: >30}) ({: >30})\t{: >30}\t{: >30}".format(form_field_id, ticket_field_name,ticket_field_name_in_portal, ticket_field_type, ticket_field_placeholder, ticket_field_placeholder_plain))
 
